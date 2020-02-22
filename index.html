@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt=br">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Canoa Digital</title>
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="vendor/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="lib/main.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+  <div id="spinner" class="spinner-grow text-primary" role="status">
+    <span class="sr-only">Carregando...</span>
+  </div>
+
+  <!-- Page Wrapper -->
+  <div id="wrapper" class="d-none">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon">
+          <img class="img-fluid" src="img/canoa-digital-logo.png" alt="Canoa Digital Logo">
+        </div>
+        <div class="sidebar-brand-text mx-3">Canoa Digital</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mt-3 mb-3 text-gray-800">Gerenciamento de veículos</h1>
+          <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Veículos</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Veículo</th>
+                      <th>Marca</th>
+                      <th>Ano</th>
+                      <th>Descrição</th>
+                      <th>Vendido</th>
+                      <th>Criado em</th>
+                      <th>Editado em</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Id</th>
+                      <th>Veículo</th>
+                      <th>Marca</th>
+                      <th>Ano</th>
+                      <th>Descrição</th>
+                      <th>Vendido</th>
+                      <th>Criado em</th>
+                      <th>Editado em</th>
+                      <th>Ações</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Canoa Digital 2020</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+      
+      <!-- Modal Veiculo -->
+      <div class="modal fade" id="modalVeiculo" tabindex="-1" role="dialog" aria-labelledby="modalVeiculoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalVeiculoLabel"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <form>
+                  <div class="form-group row">
+                    <label for="inputVeiculo" class="col-sm-2 col-form-label">Veículo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputVeiculo">
+                      <span id="inputVeiculoText"></span>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputMarca" class="col-sm-2 col-form-label">Marca</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputMarca">
+                      <span id="inputMarcaText"></span>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputAno" class="col-sm-2 col-form-label">Ano</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputAno">
+                      <span id="inputAnoText"></span>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputDescricao" class="col-sm-2 col-form-label">Descrição </label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" id="inputDescricao" rows="5" cols="10"></textarea>
+                      <span id="inputDescricaoText"></span>
+                    </div>
+                  </div>
+                  <fieldset class="form-group row">
+                    <legend class="col-form-label col-sm-2 pt-0">Vendido?</legend>
+                    <div class="col-sm-10">
+                      <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" name="inputVendido" id="inputVendidoNao" value="nao" checked>
+                        <label class="custom-control-label" for="inputVendidoNao">
+                          Não
+                        </label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" name="inputVendido" id="inputVendidoSim" value="sim">
+                        <label class="custom-control-label" for="inputVendidoSim">
+                          Sim
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+              <button type="button" id="btnAdicionarVeiculo" class="btn btn-success d-none">Adicionar</button>
+              <button type="button" id="btnEditarVeiculo" class="btn btn-warning d-none">Editar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="modalDeletarVeiculo" tabindex="-1" role="dialog" aria-labelledby="modalDeletarVeiculoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalDeletarVeiculoLabel">Deletar veículo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid pl-0 pr-0">
+                <div class="text-break">
+                  <span>Você tem certeza que quer deletar <strong id="marcaVeiculoText"></strong> ?</span>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="btnNaoDeletarVeiculo" class="btn btn-danger" data-dismiss="modal">Não</button>
+              <button type="button" id="btnDeletarVeiculo" class="btn btn-success">Sim</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alerts -->
+      <div class="d-flex justify-content-end fixed-bottom pl-4 pr-4">
+        <div class="alert alert-success fade shadow" role="alert">
+          <strong>Sucesso!</strong><p class="d-inline mb-0" id="alertSuccessText"></p>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end fixed-bottom pl-4 pr-4">
+        <div class="alert alert-danger fade shadow" role="alert">
+          <strong>Erro!</strong><p class="d-inline mb-0" id="alertDangerText"></p>
+        </div>
+      </div>
+    </div>
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="vendor/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="lib/main.js"></script>
+
+</body>
+
+</html>
