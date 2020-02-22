@@ -1,6 +1,6 @@
 # Teste desenvolvedor Full Stack :computer:
 
-Este teste tem como finalidade o desenvolvimento de uma API RESTful para cadastro, edição, visualização e exclusão de uma base de veículos. Assim como uma interface paraconsumo desta API.
+Este teste tem como finalidade o desenvolvimento de uma API RESTful para cadastro, edição, visualização e exclusão de uma base de veículos. Assim como uma interface para consumo desta API.
 
 ## Canoa Digital :boat:
 
