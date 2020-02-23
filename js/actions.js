@@ -5,43 +5,43 @@
  */
 
 $(document).on("click", "#btnAdicionarVeiculo", function(event){
-    event.preventDefault();
-    if(validateInputVeiculoMarca("inputVeiculo") && validateInputVeiculoMarca("inputMarca") &&
-    validateInputAno("inputAno") && validateInputDescricao("inputDescricao")){
+  event.preventDefault();
+  if(validateInputVeiculoMarca("inputAdicionarVeiculo") && validateInputVeiculoMarca("inputAdicionarMarca") &&
+  validateInputAno("inputAdicionarAno") && validateInputDescricao("inputAdicionarDescricao")){
 
-      let veiculo = $("#inputVeiculo").val().toUpperCase();
-      let marca = $("#inputMarca").val().toUpperCase();
-      let ano = parseInt($("#inputAno").val());
-      let descricao = $("#inputDescricao").val().toUpperCase();
-      let vendido = false;
-  
-      if($("#inputVendidoSim").is(":checked")){
-        vendido = true;
-      }
+    let veiculo = $("#inputAdicionarVeiculo").val().trim().toUpperCase();
+    let marca = $("#inputAdicionarMarca").val().trim().toUpperCase();
+    let ano = parseInt($("#inputAdicionarAno").val());
+    let descricao = $("#inputAdicionarDescricao").val().trim().toUpperCase();
+    let vendido = false;
 
-      let created_at = new Date();
-      let update_at = new Date();
-  
-      let obj = {
-        veiculo: veiculo,
-        marca: marca,
-        ano: ano,
-        descricao: descricao,
-        vendido: vendido,
-        created_at: created_at,
-        update_at: update_at
-      }
-  
-      postRequest(obj);
-
-      refreshTable();
-
-      $("#modalVeiculo").modal("hide");
-
-      $("#modalVeiculo").on("hidden.bs.modal", function(e){
-        clearInputs(["inputVeiculo", "inputMarca", "inputAno", "inputDescricao"]);
-      });
+    if($("#inputAdicionarVendidoSim").is(":checked")){
+      vendido = true;
     }
+
+    let created_at = new Date();
+    let update_at = new Date();
+
+    let obj = {
+      veiculo: veiculo,
+      marca: marca,
+      ano: ano,
+      descricao: descricao,
+      vendido: vendido,
+      created_at: created_at,
+      update_at: update_at
+    }
+
+    postRequest(obj);
+
+    $("#modalAdicionarVeiculo").modal("hide");
+
+    refreshTable();
+
+    $("#modalAdicionarVeiculo").on("hidden.bs.modal", function(e){
+      clearInputs(["inputAdicionarVeiculo", "inputAdicionarMarca", "inputAdicionarAno", "inputAdicionarDescricao"], "Adicionar");
+    });
+  }
 });
 
 /**
@@ -51,73 +51,63 @@ $(document).on("click", "#btnAdicionarVeiculo", function(event){
  */
 
 $(document).on("click", "#btnEditarVeiculo", function(event){
-    event.preventDefault();
-    if(validateInputVeiculoMarca("inputVeiculo") && validateInputVeiculoMarca("inputMarca") &&
-    validateInputAno("inputAno") && validateInputDescricao("inputDescricao")){
+  event.preventDefault();
+  if(validateInputVeiculoMarca("inputEditarVeiculo") && validateInputVeiculoMarca("inputEditarMarca") &&
+  validateInputAno("inputEditarAno") && validateInputDescricao("inputEditarDescricao")){
 
-      let veiculo = $("#inputVeiculo").val().toUpperCase();
-      let marca = $("#inputMarca").val().toUpperCase();
-      let ano = parseInt($("#inputAno").val());
-      let descricao = $("#inputDescricao").val().toUpperCase();
-      let vendido = false;
+    let veiculo = $("#inputEditarVeiculo").val().trim().toUpperCase();
+    let marca = $("#inputEditarMarca").val().trim().toUpperCase();
+    let ano = parseInt($("#inputEditarAno").val());
+    let descricao = $("#inputEditarDescricao").val().trim().toUpperCase();
+    let vendido = false;
+
+    if($("#inputEditarVendidoSim").is(":checked")){
+      vendido = true;
+    }
+
+    let created_at = getRequestById(globalVeiculoId);
+
+    setTimeout(function(){
+      created_at = new Date(created_at.responseJSON.created_at);
+      let update_at = new Date();
   
-      if($("#inputVendidoSim").is(":checked")){
-        vendido = true;
+      let obj = {
+        id: globalVeiculoId,
+        veiculo: veiculo,
+        marca: marca,
+        ano: ano,
+        descricao: descricao,
+        vendido: vendido,
+        created_at: created_at,
+        update_at: update_at
       }
 
-      // Faz uma requisicao com o id do veiculo
+      putRequest(obj);
+      
+    }, 1000);
 
-      let created_at = getRequestById(globalVeiculoId);
+    setTimeout(function(){
+      refreshTable();
+    }, 1100);
 
-      setTimeout(function(){
-        // Salva a data de criacao do veiculo
+    $("#modalEditarVeiculo").modal("hide");
 
-        created_at = new Date(created_at.responseJSON.created_at);
-        let update_at = new Date();
-    
-        let obj = {
-          id: globalVeiculoId,
-          veiculo: veiculo,
-          marca: marca,
-          ano: ano,
-          descricao: descricao,
-          vendido: vendido,
-          created_at: created_at,
-          update_at: update_at
-        }
-
-        putRequest(obj);
-
-        
-      }, 1000);
-
-      setTimeout(function(){
-        refreshTable();
-      }, 1100);
-
-      $("#modalVeiculo").modal("hide");
-
-      $("#modalVeiculo").on("hidden.bs.modal", function(e){
-        clearInputs(["inputVeiculo", "inputMarca", "inputAno", "inputDescricao"]);
-      });
-    }
-  });
-  setTimeout(function(){
-    $("#wrapper").removeClass("d-none");
-    $("#spinner").addClass("d-none");
-}, 1750);
+    $("#modalEditarVeiculo").on("hidden.bs.modal", function(e){
+      clearInputs(["inputEditarVeiculo", "inputEditarMarca", "inputEditarAno", "inputEditarDescricao"]);
+    });
+  }
+});
 
 /**
  * Deleta o veiculo e recarrega o modal
  */
 
 $("#btnDeletarVeiculo").on("click", function(event){
-    event.preventDefault();
+  event.preventDefault();
 
-    deleteRequest(globalVeiculoId);
+  deleteRequest(globalVeiculoId);
 
-    $("#modalDeletarVeiculo").modal("hide");
-    $("#modalDeletarVeiculo").on("hidden.bs.modal", function(e){
-      refreshTable();
-    });
+  refreshTable();
+
+  $("#modalDeletarVeiculo").modal("hide");
 });
