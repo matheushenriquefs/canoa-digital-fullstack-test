@@ -244,8 +244,16 @@ $(document).ready(function(){
       icon.classList.add("fas", "fa-plus");
   
       column.classList.add("col-sm-12", "col-md-4", "pl-0", "pr-0");
-      column.style.display = "flex";
-      column.style.justifyContent = "center";
+      $(column).css(
+        {
+          "display": "-webkit-box",
+          "display": "-ms-flexbox",
+          "display": "flex",
+          "-webkit-box-pack": "center",
+          "-ms-flex-pack": "center",
+          "justify-content": "center"
+        }
+      );
   
       for(let val of labels){
         val.classList.add("text-wrap");
@@ -268,15 +276,31 @@ $(document).ready(function(){
       btnIconColor.appendChild(icon);
       btn.appendChild(btnText);
   
-      dataTableRow.style.display = "flex";
-      dataTableRow.style.alignItems = "center";
+      $(dataTableRow).css(
+        {
+          "display": "-webkit-box",
+          "display": "-ms-flexbox",
+          "display": "flex",
+          "-webkit-box-pack": "center",
+          "-ms-flex-pack": "center",
+          "justify-content": "center"
+        }
+      );
       dataTableRow.insertBefore(column, dataTableRow.children[1]);
       column.appendChild(btn);
   
       if(screen.width >= 768){
         searchDiv.parentElement.classList.remove("pl-0");
-        column.style.display = "flex";
-        column.style.justifyContent = "center";
+        $(column).css(
+          {
+            "display": "-webkit-box",
+            "display": "-ms-flexbox",
+            "display": "flex",
+            "-webkit-box-pack": "center",
+            "-ms-flex-pack": "center",
+            "justify-content": "center"
+          }
+        );
       }
     }, 500);
   };
