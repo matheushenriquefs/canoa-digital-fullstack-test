@@ -1,26 +1,21 @@
 $(document).ready(function(){
   let globalVeiculoId;
 
-  function clearInputs(inputs){
+  function clearInputs(inputs, action){
     for(let val of inputs){
       $("#" + val).removeClass("border-success");
       $("#" + val).removeClass("border-danger");
-      $("#" + val).removeClass("bg-white");
-      $("#" + val).removeAttr("placeholder");
-      $("#" + val).removeAttr("disabled");
       $("#" + val).val("");
       $("#" + val + "Text").removeClass("text-success");
       $("#" + val + "Text").removeClass("text-danger");
       $("#" + val + "Text").text("");
     }
-    $("#inputVendidoNao").removeAttr("disabled");
-    $("#inputVendidoSim").removeAttr("disabled");
-    $("#inputVendidoNao").prop("checked", true);
+    $("#input" + action + "VendidoNao").prop("checked", true);
   }
 
-  function populateInputs(inputs, obj, btnAction){
+  function populateInputs(inputs, obj, action){
     let array = [];
-    if(btnAction === "btnModalInfo"){
+    if(action === "Info"){
       for(let val in obj){
         if(val !== "id"){
           array.push(obj[val]);
@@ -28,19 +23,17 @@ $(document).ready(function(){
       }
       for(let i = 0; i <= inputs.length; i++){
         if(array[i] === "Sim"){
-          $("#inputVendidoSim").removeAttr("disabled");
-          $("#inputVendidoSim").prop("checked", true);
-          $("#inputVendidoNao").attr("disabled", "");
+          $("#input" + action + "VendidoSim").removeAttr("disabled");
+          $("#input" + action + "VendidoSim").prop("checked", true);
+          $("#input" + action + "VendidoNao").attr("disabled", "");
         }else{
-          $("#inputVendidoNao").removeAttr("disabled");
-          $("#inputVendidoNao").prop("checked", true);
-          $("#inputVendidoSim").attr("disabled", "");
+          $("#input" + action + "VendidoNao").removeAttr("disabled");
+          $("#input" + action + "VendidoNao").prop("checked", true);
+          $("#input" + action + "VendidoSim").attr("disabled", "");
         }
         $("#" + inputs[i]).attr("placeholder", array[i]);
-        $("#" + inputs[i]).attr("disabled", "");
-        $("#" + inputs[i]).addClass("bg-white");
       }
-    }else if(btnAction === "btnModalEditar"){
+    }else if(action === "Editar"){
       let array = [];
       for(let val in obj){
         if(val !== "id" && val !== "update_at"){
@@ -49,9 +42,9 @@ $(document).ready(function(){
       }
       for(let i = 0; i <= inputs.length; i++){
         if(array[i] === "Sim"){
-          $("#inputVendidoSim").prop("checked", true);
+          $("#input" + action + "VendidoSim").prop("checked", true);
         }else{
-          $("#inputVendidoNao").prop("checked", true);
+          $("#input" + action + "VendidoNao").prop("checked", true);
         }
         $("#" + inputs[i]).val(array[i]);
       }
@@ -70,7 +63,6 @@ $(document).ready(function(){
         data: function(data){
           setTimeout(function(){
             $(".btnModalInfo").on("click", function(){
-              $("#modalVeiculoLabel").text("Info veículo");
 
               data.id = this.parentNode.parentNode.children[0].innerText;
               data.veiculo = this.parentNode.parentNode.children[1].innerText;
@@ -81,15 +73,12 @@ $(document).ready(function(){
 
               globalVeiculoId = data.id;
 
-              populateInputs(["inputVeiculo", "inputMarca", "inputAno", "inputDescricao"], data, "btnModalInfo");
+              populateInputs(["inputInfoVeiculo", "inputInfoMarca", "inputInfoAno", "inputInfoDescricao"], data, "Info");
             });
           }, 500);
 
           setTimeout(function(){
             $(".btnModalEditar").on("click", function(){
-              $("#modalVeiculoLabel").text("Editar veículo");
-              $("#btnEditarVeiculo").removeClass("d-none");
-              $("#btnAdicionarVeiculo").addClass("d-none");
 
               data.id = this.parentNode.parentNode.children[0].innerText;
               data.veiculo = this.parentNode.parentNode.children[1].innerText;
@@ -100,7 +89,7 @@ $(document).ready(function(){
 
               globalVeiculoId = data.id;
 
-              populateInputs(["inputVeiculo", "inputMarca", "inputAno", "inputDescricao"], data, "btnModalEditar");
+              populateInputs(["inputEditarVeiculo", "inputEditarMarca", "inputEditarAno", "inputEditarDescricao"], data, "Editar");
             });
           }, 500);
           
@@ -118,11 +107,14 @@ $(document).ready(function(){
           }, 500);
         }
       },
+      ordering: false,
       columns:[
         {
           data: "_id",
           visible: true,
+          searchable: false,
           targets: 0,
+          className: "d-none",
           render: function (data, type, full, meta){
             return  data;
           }
@@ -201,11 +193,12 @@ $(document).ready(function(){
         {
           data: "update_at",
           visible: true,
+          searchable: false,
           targets: 8,
           className: "acoes text-center",
           render: function (data, type, full, meta){
-            return '<button class="btn btn-info btn-icon-split btn-acoes mb-2 btnModalInfo" data-toggle="modal" data-target="#modalVeiculo"><span style="width: 2.5rem;" class="icon text-white"><i class="fas fa-info"></i></span><span class="text text-white">Info</span></button>' + 
-            '<button class="btn btn-warning btn-icon-split btn-acoes mb-2 btnModalEditar" data-toggle="modal" data-target="#modalVeiculo"><span style="width: 2.5rem;" class="icon text-white"><i class="fas fa-edit"></i></span><span class="text text-white">Editar</span></button>' +
+            return '<button class="btn btn-info btn-icon-split btn-acoes mb-2 btnModalInfo" data-toggle="modal" data-target="#modalInfoVeiculo"><span style="width: 2.5rem;" class="icon text-white"><i class="fas fa-info"></i></span><span class="text text-white">Info</span></button>' + 
+            '<button class="btn btn-warning btn-icon-split btn-acoes mb-2 btnModalEditar" data-toggle="modal" data-target="#modalEditarVeiculo"><span style="width: 2.5rem;" class="icon text-white"><i class="fas fa-edit"></i></span><span class="text text-white">Editar</span></button>' +
             '<button class="btn btn-danger btn-icon-split btn-acoes btnModalDeletar" data-toggle="modal" data-target="#modalDeletarVeiculo"><span style="width: 2.5rem;" class="icon text-white"><i class="fas fa-trash"></i></span><span class="text text-white">Deletar</span></button>'
           }
         }
@@ -231,21 +224,17 @@ $(document).ready(function(){
       let icon = document.createElement("i");
       let column = document.createElement("div");
       let labels = Array.from(document.getElementsByTagName("label"));
-      let idTableHeader = document.getElementsByTagName("th");
       let searchDiv = document.getElementById("dataTable_filter");
       let lengthDiv = document.getElementById("dataTable_length");
       let searchInputText = searchDiv.children;
       let searchInput = document.getElementsByClassName("form-control")[1];
       const dataTableRow = document.getElementById("dataTable_wrapper").children[0];
   
-      idTableHeader[0].style.display = "none";
-      idTableHeader[9].style.display = "none";
-  
       btn.classList.add("btn", "btn-success", "btn-icon-split", "mb-2");
       btn.style.height = "2rem";
       btn.setAttribute("id", "btnModalAdicionar");
       btn.setAttribute("data-toggle", "modal");
-      btn.setAttribute("data-target", "#modalVeiculo");
+      btn.setAttribute("data-target", "#modalAdicionarVeiculo");
   
       btnIconColor.classList.add("icon", "text-white");
   
@@ -294,42 +283,29 @@ $(document).ready(function(){
 
   customStyles();
 
-  $("#inputVeiculo").tooltip({"trigger": "focus", "title": "Um veículo válido NÃO deve conter caracteres especiais"});
+  $("#inputAdicionarVeiculo").tooltip({"trigger": "focus", "title": "Um veículo válido NÃO deve conter caracteres especiais"});
 
-  $("#inputMarca").tooltip({"trigger": "focus", "title": "Uma marca válida NÃO deve conter caracteres especiais"});
+  $("#inputAdicionarMarca").tooltip({"trigger": "focus", "title": "Uma marca válida NÃO deve conter caracteres especiais"});
 
-  $("#inputAno").tooltip({"trigger": "focus", "title": "Um ano válido NÃO deve conter letras, caracteres especiais ou números negativos"});
+  $("#inputAdicionarAno").tooltip({"trigger": "focus", "title": "Um ano válido NÃO deve conter letras, caracteres especiais ou números negativos"});
 
-  $("#inputDescricao").tooltip({"trigger": "focus", "title": "Faça uma breve descrição do veículo"});
-  
-  setTimeout(function(){
-    $("#btnModalAdicionar").on("click", function(){
-      $("#modalVeiculoLabel").text("Adicionar veículo");
-      $("#btnAdicionarVeiculo").removeClass("d-none");
-    });
+  $("#inputAdicionarDescricao").tooltip({"trigger": "focus", "title": "Faça uma breve descrição do veículo"});
 
-    $(".btnModalEditar").on("click", function(){
-      $("#modalVeiculoLabel").text("Editar veículo");
-      $("#btnEditarVeiculo").removeClass("d-none");
-    });
-  }, 500);
+  $("#inputEditarVeiculo").tooltip({"trigger": "focus", "title": "Um veículo válido NÃO deve conter caracteres especiais"});
 
-  $("#btnDeletarVeiculo").on("click", function(event){
-    event.preventDefault();
+  $("#inputEditarMarca").tooltip({"trigger": "focus", "title": "Uma marca válida NÃO deve conter caracteres especiais"});
 
-    deleteRequest(globalVeiculoId);
+  $("#inputEditarAno").tooltip({"trigger": "focus", "title": "Um ano válido NÃO deve conter letras, caracteres especiais ou números negativos"});
 
-    $("#modalDeletarVeiculo").modal("hide");
-    $("#modalDeletarVeiculo").on("hidden.bs.modal", function(e){
-      refreshTable();
-    });
+  $("#inputEditarDescricao").tooltip({"trigger": "focus", "title": "Faça uma breve descrição do veículo"});
+
+
+  $("#modalAdicionarVeiculo").on("hidden.bs.modal", function(e){
+    clearInputs(["inputAdicionarVeiculo", "inputAdicionarMarca", "inputAdicionarAno", "inputAdicionarDescricao"]);
   });
 
-  $("#modalVeiculo").on("hidden.bs.modal", function(e){
-    $("#btnAdicionarVeiculo").addClass("d-none");
-    $("#btnEditarVeiculo").addClass("d-none");
-
-    clearInputs(["inputVeiculo", "inputMarca", "inputAno", "inputDescricao"]);
+  $("#modalEditarVeiculo").on("hidden.bs.modal", function(e){
+    clearInputs(["inputEditarVeiculo", "inputEditarMarca", "inputEditarAno", "inputEditarDescricao"]);
   });
 
   function validateInputVeiculoMarca(inputId){
@@ -410,36 +386,68 @@ $(document).ready(function(){
     }
   }
 
-  $("#inputVeiculo").on("keyup", function(){
-      validateInputVeiculoMarca("inputVeiculo");
+  $("#inputAdicionarVeiculo").on("keyup", function(){
+      validateInputVeiculoMarca("inputAdicionarVeiculo");
   });
 
-  $("#inputVeiculo").on("focus", function(){
-    validateInputVeiculoMarca("inputVeiculo");
+  $("#inputAdicionarVeiculo").on("focus", function(){
+    validateInputVeiculoMarca("inputAdicionarVeiculo");
   });
   
-  $("#inputMarca").on("keyup", function(){
-      validateInputVeiculoMarca("inputMarca");
+  $("#inputAdicionarMarca").on("keyup", function(){
+      validateInputVeiculoMarca("inputAdicionarMarca");
   });
 
-  $("#inputMarca").on("focus", function(){
-    validateInputVeiculoMarca("inputMarca");
+  $("#inputAdicionarMarca").on("focus", function(){
+    validateInputVeiculoMarca("inputAdicionarMarca");
   });
   
-  $("#inputAno").on("keyup", function(){
-      validateInputAno("inputAno");
+  $("#inputAdicionarAno").on("keyup", function(){
+      validateInputAno("inputAdicionarAno");
   });
 
-  $("#inputAno").on("focus", function(){
-    validateInputAno("inputAno");
+  $("#inputAdicionarAno").on("focus", function(){
+    validateInputAno("inputAdicionarAno");
   });
   
-  $("#inputDescricao").on("keyup", function(){
-      validateInputDescricao("inputDescricao");
+  $("#inputAdicionarDescricao").on("keyup", function(){
+      validateInputDescricao("inputAdicionarDescricao");
   });
 
-  $("#inputDescricao").on("focus", function(){
-    validateInputDescricao("inputDescricao");
+  $("#inputAdicionarDescricao").on("focus", function(){
+    validateInputDescricao("inputAdicionarDescricao");
+  });
+
+  $("#inputEditarVeiculo").on("keyup", function(){
+      validateInputVeiculoMarca("inputEditarVeiculo");
+  });
+
+  $("#inputEditarVeiculo").on("focus", function(){
+    validateInputVeiculoMarca("inputEditarVeiculo");
+  });
+  
+  $("#inputEditarMarca").on("keyup", function(){
+      validateInputVeiculoMarca("inputEditarMarca");
+  });
+
+  $("#inputEditarMarca").on("focus", function(){
+    validateInputVeiculoMarca("inputEditarMarca");
+  });
+  
+  $("#inputEditarAno").on("keyup", function(){
+      validateInputAno("inputEditarAno");
+  });
+
+  $("#inputEditarAno").on("focus", function(){
+    validateInputAno("inputEditarAno");
+  });
+  
+  $("#inputEditarDescricao").on("keyup", function(){
+      validateInputDescricao("inputEditarDescricao");
+  });
+
+  $("#inputEditarDescricao").on("focus", function(){
+    validateInputDescricao("inputEditarDescricao");
   });
 
   function getRequestById(id){
@@ -566,16 +574,16 @@ $(document).ready(function(){
   
   $(document).on("click", "#btnAdicionarVeiculo", function(event){
     event.preventDefault();
-    if(validateInputVeiculoMarca("inputVeiculo") && validateInputVeiculoMarca("inputMarca") &&
-    validateInputAno("inputAno") && validateInputDescricao("inputDescricao")){
+    if(validateInputVeiculoMarca("inputAdicionarVeiculo") && validateInputVeiculoMarca("inputAdicionarMarca") &&
+    validateInputAno("inputAdicionarAno") && validateInputDescricao("inputAdicionarDescricao")){
 
-      let veiculo = $("#inputVeiculo").val().toUpperCase();
-      let marca = $("#inputMarca").val().toUpperCase();
-      let ano = parseInt($("#inputAno").val());
-      let descricao = $("#inputDescricao").val().toUpperCase();
+      let veiculo = $("#inputAdicionarVeiculo").val().trim().toUpperCase();
+      let marca = $("#inputAdicionarMarca").val().trim().toUpperCase();
+      let ano = parseInt($("#inputAdicionarAno").val());
+      let descricao = $("#inputAdicionarDescricao").val().trim().toUpperCase();
       let vendido = false;
   
-      if($("#inputVendidoSim").is(":checked")){
+      if($("#inputAdicionarVendidoSim").is(":checked")){
         vendido = true;
       }
 
@@ -594,27 +602,28 @@ $(document).ready(function(){
   
       postRequest(obj);
 
-      $("#modalVeiculo").modal("hide");
+      $("#modalAdicionarVeiculo").modal("hide");
 
-      $("#modalVeiculo").on("hidden.bs.modal", function(e){
-        clearInputs(["inputVeiculo", "inputMarca", "inputAno", "inputDescricao"]);
-        refreshTable();
+      refreshTable();
+
+      $("#modalAdicionarVeiculo").on("hidden.bs.modal", function(e){
+        clearInputs(["inputAdicionarVeiculo", "inputAdicionarMarca", "inputAdicionarAno", "inputAdicionarDescricao"], "Adicionar");
       });
     }
   });
 
   $(document).on("click", "#btnEditarVeiculo", function(event){
     event.preventDefault();
-    if(validateInputVeiculoMarca("inputVeiculo") && validateInputVeiculoMarca("inputMarca") &&
-    validateInputAno("inputAno") && validateInputDescricao("inputDescricao")){
+    if(validateInputVeiculoMarca("inputEditarVeiculo") && validateInputVeiculoMarca("inputEditarMarca") &&
+    validateInputAno("inputEditarAno") && validateInputDescricao("inputEditarDescricao")){
 
-      let veiculo = $("#inputVeiculo").val().toUpperCase();
-      let marca = $("#inputMarca").val().toUpperCase();
-      let ano = parseInt($("#inputAno").val());
-      let descricao = $("#inputDescricao").val().toUpperCase();
+      let veiculo = $("#inputEditarVeiculo").val().trim().toUpperCase();
+      let marca = $("#inputEditarMarca").val().trim().toUpperCase();
+      let ano = parseInt($("#inputEditarAno").val());
+      let descricao = $("#inputEditarDescricao").val().trim().toUpperCase();
       let vendido = false;
   
-      if($("#inputVendidoSim").is(":checked")){
+      if($("#inputEditarVendidoSim").is(":checked")){
         vendido = true;
       }
 
@@ -636,7 +645,6 @@ $(document).ready(function(){
         }
 
         putRequest(obj);
-
         
       }, 1000);
 
@@ -644,15 +652,26 @@ $(document).ready(function(){
         refreshTable();
       }, 1100);
 
-      $("#modalVeiculo").modal("hide");
+      $("#modalEditarVeiculo").modal("hide");
 
-      $("#modalVeiculo").on("hidden.bs.modal", function(e){
-        clearInputs(["inputVeiculo", "inputMarca", "inputAno", "inputDescricao"]);
+      $("#modalEditarVeiculo").on("hidden.bs.modal", function(e){
+        clearInputs(["inputEditarVeiculo", "inputEditarMarca", "inputEditarAno", "inputEditarDescricao"]);
       });
     }
   });
+
+  $("#btnDeletarVeiculo").on("click", function(event){
+    event.preventDefault();
+
+    deleteRequest(globalVeiculoId);
+
+    refreshTable();
+
+    $("#modalDeletarVeiculo").modal("hide");
+  });
+
   setTimeout(function(){
     $("#wrapper").removeClass("d-none");
     $("#spinner").addClass("d-none");
-  }, 1500);
+  }, 1000);
 });
