@@ -40,6 +40,7 @@ Para que a aplicação funcione em seu navegador é necessário iniciar o Apache
 1. Abra seu navegador e na barra de endereços digite: `http://localhost/canoa-digital-fullstack-test/index.html`.
 
 ## Estrutura de arquivos :file_folder:
+
 ```bash
 canoa-digital-fullstack-test
 ├── api
@@ -54,6 +55,11 @@ canoa-digital-fullstack-test
 │   └── custom-styles.css
 ├── img
 │   └── canoa-digital-logo.png
+├── demo
+│   ├── adicionar.gif
+│   ├── deletar.gif
+│   ├── editar.gif
+│   └── info.gif
 ├── js
 │   ├── actions.js
 │   ├── custom-styles.js
@@ -88,3 +94,21 @@ Na pasta **api** encontra-se o *server.js* que contém todas as configurações 
 Dentro da **api** há a pasta *controllers*, *models* e *routes*, cada um contendo seu respectivo arquivo de configuração (controllers definindo os metodos *CRUD*, models o schema do veiculo utilizado pelo Mongoose e routes definindo os endpoints da API).<br><br>
 Na pasta **css** há o *custom-styles.css*, que contém algumas estilizações com os os devidos vendor prefixes adicionados onde necessário. Este arquivo se encontra na pasta **lib** porém minificado e com o nome de *main.css* (este é o css que é efetivamente carregado pela página).<br><br>
 A pasta **js** contém os seguintes arquivos: *actions.js*, *custom-styles.js*, *data-tables.js*, *main.js*, *requests.js*, *tooltips.js*, *utils.js* e *validations.js*. Os outros arquivos funcionam como módulos e compõem o *main.js*, este por sua vez sem os comentários que há nos "módulos". Este arquivo encontra-se minificado na pasta **lib** com o nome de *main.js*.
+
+## Funcionamento :movie_camera:
+
+### Adicionar veículo :green_book:
+
+![Adicionar veículo](demo/adicionar.gif)
+
+### Info veículo :blue_book:
+
+![Info veículo](demo/info.gif)
+
+### Editar veículo :ledger:
+
+![Editar veículo](demo/editar.gif)
+
+### Deletar veículo :closed_book:
+
+![Deletar veículo](demo/deletar.gif)
