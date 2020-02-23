@@ -36,7 +36,7 @@ Para que a aplicação funcione em seu navegador é necessário iniciar o Apache
 
 1. Clone o repositório para sua pasta **www** (WAMP, Laragon), **htdocs** (XAMPP) ou sua pasta de preferência.
 1. Abra o CMD ou Terminal e navegue até a pasta do projeto.
-1. Execute o comando `npm start`.
+1. Execute o comando `npm install` e em seguida `npm start`.
 1. Abra seu navegador e na barra de endereços digite: `http://localhost/canoa-digital-fullstack-test/index.html`.
 
 ## Estrutura de arquivos :file_folder:
@@ -83,7 +83,7 @@ canoa-digital-fullstack-test
 ### Detalhando a estrutura :open_file_folder:
 
 No desenvolvimento desta aplicação foi usado um template Bootstrap de dashboard com integração com o plugin JQuery Data Tables.
-Todos os arquivos de terceiros (***.css, ***.js) estão dentro da pasta **vendor**.<br>
+Todos os arquivos de terceiros (***.css, ***.js) estão dentro da pasta **vendor**.<br><br>
 Na pasta **api** encontra-se o *server.js* que contém todas as configurações da API em si, como conecção ao banco de dados, definição de porta, etc...<br><br>
 Dentro da **api** há a pasta *controllers*, *models* e *routes*, cada um contendo seu respectivo arquivo de configuração (controllers definindo os metodos *CRUD*, models o schema do veiculo utilizado pelo Mongoose e routes definindo os endpoints da API).<br><br>
 Na pasta **css** há o *custom-styles.css*, que contém algumas estilizações com os os devidos vendor prefixes adicionados onde necessário. Este arquivo se encontra na pasta **lib** porém minificado e com o nome de *main.css* (este é o css que é efetivamente carregado pela página).<br><br>
