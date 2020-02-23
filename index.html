@@ -75,7 +75,6 @@
 
           <!-- Page Heading -->
           <h1 class="h3 mt-3 mb-3 text-gray-800">Gerenciamento de veículos</h1>
-          <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -87,7 +86,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Id</th>
+                      <th class="d-none">Id</th>
                       <th>Veículo</th>
                       <th>Marca</th>
                       <th>Ano</th>
@@ -100,7 +99,7 @@
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>Id</th>
+                      <th class="d-none">Id</th>
                       <th>Veículo</th>
                       <th>Marca</th>
                       <th>Ano</th>
@@ -133,12 +132,12 @@
       </footer>
       <!-- End of Footer -->
       
-      <!-- Modal Veiculo -->
-      <div class="modal fade" id="modalVeiculo" tabindex="-1" role="dialog" aria-labelledby="modalVeiculoLabel" aria-hidden="true">
+      <!-- Modal Adicionar Veiculo -->
+      <div class="modal fade" id="modalAdicionarVeiculo" tabindex="-1" role="dialog" aria-labelledby="modalAdicionarVeiculoLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="modalVeiculoLabel"></h5>
+              <h5 class="modal-title" id="modalAdicionarVeiculoLabel">Adicionar veículo</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -147,45 +146,45 @@
               <div class="container-fluid">
                 <form>
                   <div class="form-group row">
-                    <label for="inputVeiculo" class="col-sm-2 col-form-label">Veículo</label>
+                    <label for="inputAdicionarVeiculo" class="col-sm-2 col-form-label">Veículo</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputVeiculo">
-                      <span id="inputVeiculoText"></span>
+                      <input type="text" class="form-control" id="inputAdicionarVeiculo">
+                      <span id="inputAdicionarVeiculoText"></span>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputMarca" class="col-sm-2 col-form-label">Marca</label>
+                    <label for="inputAdicionarMarca" class="col-sm-2 col-form-label">Marca</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputMarca">
-                      <span id="inputMarcaText"></span>
+                      <input type="text" class="form-control" id="inputAdicionarMarca">
+                      <span id="inputAdicionarMarcaText"></span>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputAno" class="col-sm-2 col-form-label">Ano</label>
+                    <label for="inputAdicionarAno" class="col-sm-2 col-form-label">Ano</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputAno">
-                      <span id="inputAnoText"></span>
+                      <input type="text" class="form-control" id="inputAdicionarAno">
+                      <span id="inputAdicionarAnoText"></span>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputDescricao" class="col-sm-2 col-form-label">Descrição </label>
+                    <label for="inputAdicionarDescricao" class="col-sm-2 col-form-label">Descrição </label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="inputDescricao" rows="5" cols="10"></textarea>
-                      <span id="inputDescricaoText"></span>
+                      <textarea class="form-control" id="inputAdicionarDescricao" rows="5" cols="10"></textarea>
+                      <span id="inputAdicionarDescricaoText"></span>
                     </div>
                   </div>
                   <fieldset class="form-group row">
                     <legend class="col-form-label col-sm-2 pt-0">Vendido?</legend>
                     <div class="col-sm-10">
                       <div class="custom-control custom-radio">
-                        <input class="custom-control-input" type="radio" name="inputVendido" id="inputVendidoNao" value="nao" checked>
-                        <label class="custom-control-label" for="inputVendidoNao">
+                        <input class="custom-control-input" type="radio" name="inputAdicionarVendido" id="inputAdicionarVendidoNao" value="nao" checked>
+                        <label class="custom-control-label" for="inputAdicionarVendidoNao">
                           Não
                         </label>
                       </div>
                       <div class="custom-control custom-radio">
-                        <input class="custom-control-input" type="radio" name="inputVendido" id="inputVendidoSim" value="sim">
-                        <label class="custom-control-label" for="inputVendidoSim">
+                        <input class="custom-control-input" type="radio" name="inputAdicionarVendido" id="inputAdicionarVendidoSim" value="sim">
+                        <label class="custom-control-label" for="inputAdicionarVendidoSim">
                           Sim
                         </label>
                       </div>
@@ -196,13 +195,151 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-              <button type="button" id="btnAdicionarVeiculo" class="btn btn-success d-none">Adicionar</button>
-              <button type="button" id="btnEditarVeiculo" class="btn btn-warning d-none">Editar</button>
+              <button type="button" id="btnAdicionarVeiculo" class="btn btn-success">Adicionar</button>
+              <!-- <button type="button" id="btnEditarVeiculo" class="btn btn-warning d-none">Editar</button> -->
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Modal Info Veiculo -->
+      <div class="modal fade" id="modalInfoVeiculo" tabindex="-1" role="dialog" aria-labelledby="modalInfoVeiculoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalInfoVeiculoLabel">Info veículo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <form>
+                  <div class="form-group row">
+                    <label for="inputInfoVeiculo" class="col-sm-2 col-form-label">Veículo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control bg-white" id="inputInfoVeiculo" disabled>
+                      <span id="inputInfoVeiculoText"></span>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputInfoMarca" class="col-sm-2 col-form-label">Marca</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control bg-white" id="inputInfoMarca" disabled>
+                      <span id="inputInfoMarcaText"></span>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputInfoAno" class="col-sm-2 col-form-label">Ano</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control bg-white" id="inputInfoAno" disabled>
+                      <span id="inputInfoAnoText"></span>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputInfoDescricao" class="col-sm-2 col-form-label">Descrição </label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control bg-white" id="inputInfoDescricao" rows="5" cols="10" disabled></textarea>
+                      <span id="inputInfoDescricaoText"></span>
+                    </div>
+                  </div>
+                  <fieldset class="form-group row">
+                    <legend class="col-form-label col-sm-2 pt-0">Vendido?</legend>
+                    <div class="col-sm-10">
+                      <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" name="inputVendido" id="inputInfoVendidoNao" value="nao" checked>
+                        <label class="custom-control-label" for="inputInfoVendidoNao">
+                          Não
+                        </label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" name="inputVendido" id="inputInfoVendidoSim" value="sim">
+                        <label class="custom-control-label" for="inputInfoVendidoSim">
+                          Sim
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Editar Veiculo -->
+      <div class="modal fade" id="modalEditarVeiculo" tabindex="-1" role="dialog" aria-labelledby="modalEditarVeiculoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalEditarVeiculoLabel">Editar veículo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <form>
+                  <div class="form-group row">
+                    <label for="inputEditarVeiculo" class="col-sm-2 col-form-label">Veículo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputEditarVeiculo">
+                      <span id="inputEditarVeiculoText"></span>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEditarMarca" class="col-sm-2 col-form-label">Marca</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputEditarMarca">
+                      <span id="inputEditarMarcaText"></span>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEditarAno" class="col-sm-2 col-form-label">Ano</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputEditarAno">
+                      <span id="inputEditarAnoText"></span>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEditarDescricao" class="col-sm-2 col-form-label">Descrição </label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" id="inputEditarDescricao" rows="5" cols="10"></textarea>
+                      <span id="inputEditarDescricaoText"></span>
+                    </div>
+                  </div>
+                  <fieldset class="form-group row">
+                    <legend class="col-form-label col-sm-2 pt-0">Vendido?</legend>
+                    <div class="col-sm-10">
+                      <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" name="inputEditarVendido" id="inputEditarVendidoNao" value="nao" checked>
+                        <label class="custom-control-label" for="inputEditarVendidoNao">
+                          Não
+                        </label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" name="inputEditarVendido" id="inputEditarVendidoSim" value="sim">
+                        <label class="custom-control-label" for="inputEditarVendidoSim">
+                          Sim
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+              <button type="button" id="btnEditarVeiculo" class="btn btn-warning">Editar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Deletar Veiculo -->
       <div class="modal fade" id="modalDeletarVeiculo" tabindex="-1" role="dialog" aria-labelledby="modalDeletarVeiculoLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
