@@ -23,7 +23,6 @@ function initializeDataTables(){
         data: function(data){
           setTimeout(function(){
             $(".btnModalInfo").on("click", function(){
-              $("#modalVeiculoLabel").text("Info veículo");
 
               data.id = this.parentNode.parentNode.children[0].innerText;
               data.veiculo = this.parentNode.parentNode.children[1].innerText;
@@ -34,7 +33,7 @@ function initializeDataTables(){
 
               globalVeiculoId = data.id;
 
-              populateInputs(["inputVeiculo", "inputMarca", "inputAno", "inputDescricao"], data, "btnModalInfo");
+              populateInputs(["inputInfoVeiculo", "inputInfoMarca", "inputInfoAno", "inputInfoDescricao"], data, "Info");
             });
           }, 1500);
 
@@ -46,9 +45,6 @@ function initializeDataTables(){
 
           setTimeout(function(){
             $(".btnModalEditar").on("click", function(){
-              $("#modalVeiculoLabel").text("Editar veículo");
-              $("#btnEditarVeiculo").removeClass("d-none");
-              $("#btnAdicionarVeiculo").addClass("d-none");
 
               data.id = this.parentNode.parentNode.children[0].innerText;
               data.veiculo = this.parentNode.parentNode.children[1].innerText;
@@ -59,7 +55,7 @@ function initializeDataTables(){
 
               globalVeiculoId = data.id;
 
-              populateInputs(["inputVeiculo", "inputMarca", "inputAno", "inputDescricao"], data, "btnModalEditar");
+              populateInputs(["inputEditarVeiculo", "inputEditarMarca", "inputEditarAno", "inputEditarDescricao"], data, "Editar");
             });
           }, 1500);
           
@@ -82,11 +78,14 @@ function initializeDataTables(){
           }, 1500);
         }
       },
+      ordering: false,
       columns:[
         {
           data: "_id",
           visible: true,
+          searchable: false,
           targets: 0,
+          className: "d-none",
           render: function (data, type, full, meta){
             return  data;
           }
@@ -180,6 +179,7 @@ function initializeDataTables(){
         {
           data: "update_at",
           visible: true,
+          searchable: false,
           targets: 8,
           className: "acoes text-center",
 
@@ -188,8 +188,8 @@ function initializeDataTables(){
            */
           
           render: function (data, type, full, meta){
-            return '<button class="btn btn-info btn-icon-split btn-acoes mb-2 btnModalInfo" data-toggle="modal" data-target="#modalVeiculo"><span style="width: 2.5rem;" class="icon text-white"><i class="fas fa-info"></i></span><span class="text text-white">Info</span></button>' + 
-            '<button class="btn btn-warning btn-icon-split btn-acoes mb-2 btnModalEditar" data-toggle="modal" data-target="#modalVeiculo"><span style="width: 2.5rem;" class="icon text-white"><i class="fas fa-edit"></i></span><span class="text text-white">Editar</span></button>' +
+            return '<button class="btn btn-info btn-icon-split btn-acoes mb-2 btnModalInfo" data-toggle="modal" data-target="#modalInfoVeiculo"><span style="width: 2.5rem;" class="icon text-white"><i class="fas fa-info"></i></span><span class="text text-white">Info</span></button>' + 
+            '<button class="btn btn-warning btn-icon-split btn-acoes mb-2 btnModalEditar" data-toggle="modal" data-target="#modalEditarVeiculo"><span style="width: 2.5rem;" class="icon text-white"><i class="fas fa-edit"></i></span><span class="text text-white">Editar</span></button>' +
             '<button class="btn btn-danger btn-icon-split btn-acoes btnModalDeletar" data-toggle="modal" data-target="#modalDeletarVeiculo"><span style="width: 2.5rem;" class="icon text-white"><i class="fas fa-trash"></i></span><span class="text text-white">Deletar</span></button>'
           }
         }
