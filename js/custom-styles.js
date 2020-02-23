@@ -12,21 +12,17 @@ function customStyles(){
     let icon = document.createElement("i");
     let column = document.createElement("div");
     let labels = Array.from(document.getElementsByTagName("label"));
-    let idTableHeader = document.getElementsByTagName("th");
     let searchDiv = document.getElementById("dataTable_filter");
     let lengthDiv = document.getElementById("dataTable_length");
     let searchInputText = searchDiv.children;
     let searchInput = document.getElementsByClassName("form-control")[1];
     const dataTableRow = document.getElementById("dataTable_wrapper").children[0];
 
-    idTableHeader[0].style.display = "none";
-    idTableHeader[9].style.display = "none";
-
     btn.classList.add("btn", "btn-success", "btn-icon-split", "mb-2");
     btn.style.height = "2rem";
     btn.setAttribute("id", "btnModalAdicionar");
     btn.setAttribute("data-toggle", "modal");
-    btn.setAttribute("data-target", "#modalVeiculo");
+    btn.setAttribute("data-target", "#modalAdicionarVeiculo");
 
     btnIconColor.classList.add("icon", "text-white");
 
@@ -70,5 +66,5 @@ function customStyles(){
       column.style.display = "flex";
       column.style.justifyContent = "center";
     }
-  }, 1500);
+  }, 500);
 };
