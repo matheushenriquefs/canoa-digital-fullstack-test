@@ -229,58 +229,55 @@ $(document).ready(function(){
       let searchInputText = searchDiv.children;
       let searchInput = document.getElementsByClassName("form-control")[1];
       let dataTableRow = document.getElementById("dataTable_wrapper").children[0];
-
+      
       btn.classList.add("btn", "btn-success", "btn-icon-split", "mb-2");
       btn.style.height = "2rem";
       btn.setAttribute("id", "btnModalAdicionar");
       btn.setAttribute("data-toggle", "modal");
       btn.setAttribute("data-target", "#modalAdicionarVeiculo");
-
+  
       btnIconColor.classList.add("icon", "text-white");
-
+  
       btnText.classList.add("text", "text-white");
       btnText.innerText = "Adicionar veículo";
-
+  
       icon.classList.add("fas", "fa-plus");
-
-      column.classList.add("col-sm-12", "col-md-4", "pl-0", "pr-0");
-      column.style.display.flex = "flex";
-      column.style.justifyContent = "center";
-
+  
+      column.classList.add("col-sm-12", "col-md-4", "pl-0", "pr-0", "d-flex-justify-content-center");
+  
       for(let val of labels){
         val.classList.add("text-wrap");
       }
       labels[0].childNodes[1].textContent = " Itens";
-
+  
       searchDiv.parentElement.classList.add("pl-0");
       searchDiv.parentElement.classList.remove("col-md-6");
       searchDiv.parentElement.classList.add("col-md-4");
-
+  
       lengthDiv.parentElement.classList.remove("col-md-6");
       lengthDiv.parentElement.classList.add("col-md-4");
-
+  
       searchInputText[0].childNodes[0].textContent = "";
-
+  
       searchInput.classList.add("ml-0", "w-100");
       searchInput.setAttribute("placeholder", "Pesquisar");
-
+  
       btn.appendChild(btnIconColor);
       btnIconColor.appendChild(icon);
       btn.appendChild(btnText);
-
-      dataTableRow.style.display = "flex";
-      dataTableRow.style.justifyContent = "center";
-
+  
+      dataTableRow.classList.add("d-flex-justify-content-center");
+  
       dataTableRow.insertBefore(column, dataTableRow.children[1]);
       column.appendChild(btn);
-
+  
       if(screen.width >= 768){
         searchDiv.parentElement.classList.remove("pl-0");
-        column.style.display.flex = "flex";
-        column.style.justifyContent = "center";
+        column.classList.add("d-flex-justify-content-center");
       }
     }, 500);
   };
+  
 
   customStyles();
 

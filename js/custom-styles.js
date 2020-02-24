@@ -31,9 +31,7 @@ function customStyles(){
 
     icon.classList.add("fas", "fa-plus");
 
-    column.classList.add("col-sm-12", "col-md-4", "pl-0", "pr-0");
-    column.style.display.flex = "flex";
-    column.style.justifyContent = "center";
+    column.classList.add("col-sm-12", "col-md-4", "pl-0", "pr-0", "d-flex-justify-content-center");
 
     for(let val of labels){
       val.classList.add("text-wrap");
@@ -56,16 +54,14 @@ function customStyles(){
     btnIconColor.appendChild(icon);
     btn.appendChild(btnText);
 
-    dataTableRow.style.display = "flex";
-    dataTableRow.style.justifyContent = "center";
+    dataTableRow.classList.add("d-flex-justify-content-center");
 
     dataTableRow.insertBefore(column, dataTableRow.children[1]);
     column.appendChild(btn);
 
     if(screen.width >= 768){
       searchDiv.parentElement.classList.remove("pl-0");
-      column.style.display.flex = "flex";
-      column.style.justifyContent = "center";
+      column.classList.add("d-flex-justify-content-center");
     }
   }, 500);
 };

@@ -41,3 +41,12 @@ td.acoes{
 th.acoes.sorting{
     width: inherit;
 }
+
+.d-flex-justify-content-center{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; 
+    -webkit-box-pack: center; 
+    -ms-flex-pack: center; 
+    justify-content: center;
+}
