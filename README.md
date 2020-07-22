@@ -90,7 +90,7 @@ canoa-digital-fullstack-test
 
 No desenvolvimento desta aplicação foi usado um template Bootstrap de dashboard com integração com o plugin JQuery Data Tables.
 Todos os arquivos de terceiros (***.css, ***.js) estão dentro da pasta **vendor**.<br><br>
-Na pasta **api** encontra-se o *server.js* que contém todas as configurações da API em si, como conecção ao banco de dados, definição de porta, etc...<br><br>
+Na pasta **api** encontra-se o *server.js* que contém todas as configurações da API em si, como conexão ao banco de dados, definição de porta, etc...<br><br>
 Dentro da **api** há a pasta *controllers*, *models* e *routes*, cada um contendo seu respectivo arquivo de configuração (controllers definindo os metodos *CRUD*, models o schema do veiculo utilizado pelo Mongoose e routes definindo os endpoints da API).<br><br>
 Na pasta **css** há o *custom-styles.css*, que contém algumas estilizações com os os devidos vendor prefixes adicionados onde necessário. Este arquivo se encontra na pasta **lib** porém minificado e com o nome de *main.css* (este é o css que é efetivamente carregado pela página).<br><br>
 A pasta **js** contém os seguintes arquivos: *actions.js*, *custom-styles.js*, *data-tables.js*, *main.js*, *requests.js*, *tooltips.js*, *utils.js* e *validations.js*. Os outros arquivos funcionam como módulos e compõem o *main.js*, este por sua vez sem os comentários que há nos "módulos". Este arquivo encontra-se minificado na pasta **lib** com o nome de *main.js*.
